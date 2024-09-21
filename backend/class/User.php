@@ -6,19 +6,18 @@ class User{
         $this -> db_connect = $db_connect;
     }
 
-    public function  createUser($id_user, $name, $email, $password, $role){
+    public function  createUser($id_user, $name, $email, $password){
 
         try{
-            $query = $this -> db_connect -> prepare("INSERT INTO usuarios (id_usuario, nombre, email, constraseña, id_usuario_rol) VALUES (?,?,?,?,?)");
-            $query -> bind_param("isssi", $id_user, $name, $email, $password, $role);
+            $query = $this -> db_connect -> prepare("INSERT INTO members (id, name, email, password) VALUES (?,?,?,?)");
+            $query -> bind_param("isss", $id_user, $name, $email, $password);
             $query -> execute();
-        if($query -> affected_rows>0){
-            return true;
+                if($query -> affected_rows > 0){
+                    return true;
+                }
+                return false;
         }
-            return false;
-        }
-        catch(Exception $e){
-            
+        catch(Exception $e){    
             echo "Error" .$e->getMessage();
             return false;
             $query -> close();

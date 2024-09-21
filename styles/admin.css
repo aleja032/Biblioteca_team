@@ -2,6 +2,7 @@
 
 *{
     font-family: 'Poppins';
+    box-sizing: border-box;
 }
 
 body{
@@ -20,7 +21,21 @@ body{
     width: 20%;
 }
 
-.main-cont{
+main{
+    height: 100%;
     width: 80%;
-    border: 1px solid black;
+    border: 1px solid pink;
+    display: flex;
+    flex-direction: column; 
+    overflow: hidden;
+}
+
+.cont_main{
+    border: 1px solid blue;
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    height: 80%;
+    width: 100%;
+
 }

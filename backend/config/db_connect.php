@@ -1,11 +1,11 @@
 <?php
-    $conn = mysqli_connect('localhost', 'root','', 'biblioteca');
+    $conn = mysqli_connect('localhost', 'root','', 'library');
 
     if(mysqli_error($conn)){
-        die("aaaaaaaaa");
+        die("Database connection failed.");
     }
     else
     {
-        echo "si";
+        echo "Connection successful.";
     }
 ?>

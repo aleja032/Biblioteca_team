@@ -9,9 +9,9 @@
     $email = $_POST['email'];
     $pass = $_POST['password'];
 
-    $a = $user -> createUser ($id, $name, $email, $pass, '1');
+    $func = $user -> createUser ($id, $name, $email, $pass);
 
-    if($a){
+    if($func){
         echo"user added";
     }
 ?>

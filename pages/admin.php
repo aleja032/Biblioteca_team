@@ -4,49 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library ADMIN</title>
-    
+    <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
+    <!-- css -->
     <link rel="stylesheet" href="../styles/admin.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <!-- jquery y ajax -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div class="container-fluid border d-flex">
-        <div class="side-bar">
+    <section class="container-fluid border d-flex ">
+        <div class="side-bar bg-danger">
             <h1 class="fw-semibold p-5">Bookworld</h1>
             <ul class="options p-5">
-                <li><a href="#">Registrar usuario</a></li>
-                <li><a href="#">Registrar libro</a></li>
-                <li><a href="#">Préstamo de libro</a></li>
+                <li><a href="#reg_user">Registrar usuario</a></li>
+                <li><a href="#reg_book">Registrar libro</a></li>
                 <li><a href="#">Reportar novedad de libro</a></li>
+                <li><a href="#">Libros prestados</a></li>
+                <li><a href="#">Lista de usuarios</a></li>
                 <li><img src="" alt=""></li>
                 <li><button class="btn btn-primary" id="logout"><p>Cerrar sesión</p></button></li>
             </ul>
         </div>
-        <div class="main-cont p-5">
-            Registrar usuario
-            <form id="form_user">
-                <label for="id_user">ID: </label>
-                    <input type="number" name="id_user" min="1">
-                <br>
-                <label for="name_user">Nombre: </label>
-                    <input type="text" name="name">
-                <br>
-                <label for="email_user">Email: </label>
-                    <input type="email" name="email">
-                <br>
-                <label for="password-user">Contraseña: </label>
-                    <input type="password" name="password">
-                <br>
-                <button type="submit">
-                    Enviar
-                </button>
-            </form>
-        </div>
-    </div>
+        <main>
+            <!-- register new user -->
+            <div id="reg_user" class="cont_main p-5">
+                <h3>Registrar usuario</h3>
+                <form id="form_user">
+                    <label for="id_user">ID: </label>
+                        <input type="number" name="id_user" min="1">
+                    <br>
+                    <br>
+                    <label for="name_user">Nombre: </label>
+                        <input type="text" name="name">
+                    <br>
+                    <br>
+                    <label for="email_user">Email: </label>
+                        <input type="email" name="email">
+                    <br>
+                    <br>
+                    <label for="password-user">Contraseña: </label>
+                        <input type="password" name="password">
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary">
+                        Enviar
+                    </button>
+                </form>
+            </div>
+            <!-- register new book -->
+             <div id="reg_book" class="cont_main p-5">
+             <h3>Registrar libro</h3>
+                <form id="form_book">
+                    <label for="book">ID Book: </label>
+                        <input type="number" name="id_book" min="1">
+                    <br>
+                    <br>
+                    <label for="book">Nombre del libro: </label>
+                        <input type="text" name="name_book">
+                    <br>
+                    <br>
+                    <label for="book">Autor: </label>
+                        <input type="text" name="author_book">
+                    <br>
+                    <br>
+                    <label for="book">ISBN: </label>
+                        <input type="text" name="isbn_book">
+                    <br>
+                    <br>
+                    <label for="book">Año: </label>
+                        <input type="number" name="year" min="1">
+                    <br>
+                    <br>
+                    <label for="book">Cantidad de libros: </label>
+                        <input type="number" name="total_copies">
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary">
+                        Enviar
+                    </button>
+                </form>
+             </div>
+            
+        </main>
+    </section>
 </body>
 <script src="../js/admin.js"></script>
 </html>
