@@ -42,3 +42,16 @@ $(document).ready(function(){
         })
     })
 })
+
+// delete book
+$(document).on('click', '.delete_item', function(){
+    let id = $(this).data('id');
+    $.ajax({
+        url: '../backend/process_info/delete_book.php',
+        type: 'POST',
+        data: {id : id},
+        success:function(response){
+            console.log(response);
+        }
+    })
+});

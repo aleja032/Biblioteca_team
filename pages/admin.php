@@ -13,6 +13,13 @@
     <!-- <script src="../js/jquery.js"></script> -->
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <?php
+        require_once '../backend/config/db_connect.php';
+        include_once '../backend/class/Book.php';
+        include_once '../backend/class/User.php';
+        include_once '../backend/class/LendBook.php';
+    ?>
 </head>
 <body>
     <section class="container-fluid border d-flex ">
@@ -21,9 +28,10 @@
             <ul class="options p-5">
                 <li><a href="#reg_user">Registrar usuario</a></li>
                 <li><a href="#reg_book">Registrar libro</a></li>
-                <li><a href="#">Reportar préstamo de libro</a></li>
-                <li><a href="#">Libros prestados</a></li>
-                <li><a href="#">Lista de usuarios</a></li>
+                <li><a href="#reg_lend">Reportar préstamo de libro</a></li>
+                <li><a href="#list_lend">Libros prestados</a></li>
+                <li><a href="#">Lista de libros (delete)</a></li>
+                <li><a href="#">Lista de usuarios (update)</a></li>
                 <li><img src="" alt=""></li>
                 <li><button class="btn btn-primary" id="logout"><p>Cerrar sesión</p></button></li>
             </ul>
@@ -58,10 +66,6 @@
              <div id="reg_book" class="cont_main p-5">
              <h3>Registrar libro</h3>
                 <form id="form_book">
-                    <label for="book">ID Book: </label>
-                        <input type="number" name="id_book" min="1">
-                    <br>
-                    <br>
                     <label for="book">Nombre del libro: </label>
                         <input type="text" name="name_book">
                     <br>
@@ -91,17 +95,27 @@
             <div id="reg_lend" class="cont_main p-5">
                 <h3>Reportar préstamo de libro</h3>
                 <form id="form_lend">
-                    <label for="id_user">ID Usuario: </label>
-                        <input type="number" name="id_user_lend" min="1">
+                    <label for="id_user">Usuario: </label>
+                        <select name="id_user_lend">
+                            <?php
+                                $user = new User($conn);
+
+                                $users = $user -> AllUsers();
+                                foreach($users as $usuario){
+
+                                    ?>
+                            <option value="<?php echo $usuario['id'];?>"><?php echo $usuario['name'];?></option>
+
+                            <?php
+                                }
+                            ?>
+
+                        </select>
                     <br>
                     <br>
                     <label for="name_user">Libro: </label>
-                        <select name="book_id_lend">
-                        <option value="1">aaaa</option>
+                    <select name="book_id_lend">
                         <?php
-                                require_once '../backend/config/db_connect.php';
-                                include_once '../backend/class/Book.php';
-
                                 $book = new Book($conn);
 
                                 $books = $book -> allBooks();
@@ -124,6 +138,82 @@
                         Enviar
                     </button>
                 </form>
+            </div>
+             <!-- lent books -->
+            <div id="list_lend" class="cont_main p-5">
+                <h3>Libros prestados</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre Libro</th>
+                        <th scope="col">ISBN</th>
+                        <th scope="col">Miembro</th>
+                        <th scope="col">Fecha de préstamo</th>
+                        <th scope="col">Fecha limite a entregar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            $lent = new LendBook($conn);
+
+                            $lentsqli = $lent -> allLentBooks();
+                            foreach($lentsqli as $prestado){
+                            
+                        ?>
+                            <tr>
+                                <th scope="row"><?php echo $prestado['id'];?></th>
+                                <td><?php echo $prestado['title'];?></td>
+                                <td><?php echo $prestado['isbn'];?></td>
+                                <td><?php echo $prestado['name'];?></td>
+                                <td><?php echo $prestado['lend_date'];?></td>
+                                <td><?php echo $prestado['due_date'];?></td>
+                            </tr>
+
+                        <?php 
+                                }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+         <!-- book list -->
+         <div id="list_book" class="cont_main p-5">
+                <h3>Lista de libros</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre Libro</th>
+                        <th scope="col">ISBN</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Año</th>
+                        <th scope="col">Total Copias</th>
+                        <th scope="col">Copias Disponibles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            
+                            foreach($books as $libro){
+                                $id = $libro['id'];
+                        ?>
+
+                        <tr>
+                            <th scope="row"><?php echo $libro['id'];?></th>
+                            <td><?php echo $libro['title'];?></td>
+                            <td><?php echo $libro['isbn'];?></td>
+                            <td><?php echo $libro['author'];?></td>
+                            <td><?php echo $libro['published_year'];?></td>
+                            <td><?php echo $libro['total_copies'];?></td>
+                            <td><?php echo $libro['available_copies'];?></td>
+                            <td><button class="btn btn-danger delete" data-id="<?php echo $id ?>">Eliminar</button></td>
+                        </tr>
+
+                        <?php 
+                            }
+                        ?>
+                    </tbody>
+                </table>
             </div>
             
         </main>

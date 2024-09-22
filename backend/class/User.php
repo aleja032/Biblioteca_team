@@ -23,5 +23,25 @@ class User{
             $query -> close();
         }
     }
+
+    public function AllUsers(){
+        
+        try{
+            $query = $this -> db_connect -> prepare("SELECT id, name from members");
+            $query -> execute();
+            $result = $query -> get_result();
+            $members = $result -> fetch_all(MYSQLI_ASSOC);
+            $query ->close();
+
+            if($members){
+                return $members;
+            }
+        }
+        catch(Exception $e){
+            echo"Error".$e->getMessage();
+            return false;
+            $query -> close();
+        }
+    }
 }
 ?>
