@@ -27,3 +27,18 @@ $(document).ready(function(){
         })
     })
 })
+
+// lend a book
+$(document).ready(function(){
+    $('#form_lend').submit(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: '../backend/process_info/add_lend.php',
+            type: 'POST',
+            data: $(this).serialize(),
+            success:function(response){
+                console.log(response);
+            }
+        })
+    })
+})

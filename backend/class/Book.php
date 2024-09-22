@@ -23,4 +23,24 @@ class Book{
             $query -> close();
         }
     }
+
+    public function allBooks(){
+        
+        try{
+            $query = $this -> db_connect -> prepare("SELECT id, title from books");
+            $query -> execute();
+            $result = $query -> get_results();
+            $books = $result -> fetch_all(MYSQL_ASSOC);
+            $query ->close();
+
+            if($books){
+                return $books;
+            }
+        }
+        catch(Exception $e){
+            echo"Error".$e->getMessage();
+            return false;
+            $query -> close();
+        }
+    }
 }
