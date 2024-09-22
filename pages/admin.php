@@ -159,7 +159,6 @@
 
                             $lentsqli = $lent -> allLentBooks();
                             foreach($lentsqli as $prestado){
-                            
                         ?>
                             <tr>
                                 <th scope="row"><?php echo $prestado['id'];?></th>
@@ -168,10 +167,11 @@
                                 <td><?php echo $prestado['name'];?></td>
                                 <td><?php echo $prestado['lend_date'];?></td>
                                 <td><?php echo $prestado['due_date'];?></td>
+                                <td><button class="btn btn-success" id="complete" data-id="<?php echo $prestado['id'];?>">Marcar Devuelto</button></td>
                             </tr>
 
                         <?php 
-                                }
+                            }
                         ?>
                     </tbody>
                 </table>
@@ -206,7 +206,42 @@
                             <td><?php echo $libro['published_year'];?></td>
                             <td><?php echo $libro['total_copies'];?></td>
                             <td><?php echo $libro['available_copies'];?></td>
-                            <td><button class="btn btn-danger delete" data-id="<?php echo $id ?>">Eliminar</button></td>
+                            <td><button class="btn btn-danger" id="delete" data-id="<?php echo $id;?>">Eliminar</button></td>
+                        </tr>
+
+                        <?php 
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+         <!-- user list -->
+         <div id="list_user" class="cont_main p-5">
+                <h3>Lista de usuarios</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombres</th>
+                        <th scope="col">Correo Electronico</th>
+                        <th scope="col">Fecha de Inscripcion</th>
+                        <th scope="col">Contraseña</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            
+                            foreach($users as $usuario){
+                                $id_user = $usuario['id'];
+                        ?>
+
+                        <tr>
+                            <th scope="row"><?php echo $usuario['id'];?></th>
+                            <td><?php echo $usuario['name'];?></td>
+                            <td><?php echo $usuario['email'];?></td>
+                            <td><?php echo $usuario['membership_date'];?></td>
+                            <td><?php echo $usuario['password'];?></td>
+                            <td><button class="btn btn-info" id="edit" data-id="<?php echo $id_user;?>">Editar</button></td>
                         </tr>
 
                         <?php 

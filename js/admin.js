@@ -43,14 +43,34 @@ $(document).ready(function(){
     })
 })
 
+// lent book completed
+$(document).on('click', '#complete', function(){
+    let id = $(this).data('id');
+    let returnDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+    let idBook = "HPTAAAAA DE DONDE SACO ESTA MRDA"; //xdddddddddddddddddddddddd
+    $.ajax({
+        url: '../backend/process_info/update_lent.php',
+        type: 'POST',
+        data: { id : id,
+                return_date : returnDate,
+                id_book : idBook
+        },
+        success:function(response){
+            console.log(id);
+            console.log(response);
+        }
+    })
+});
+
 // delete book
-$(document).on('click', '.delete_item', function(){
+$(document).on('click', '#delete', function(){
     let id = $(this).data('id');
     $.ajax({
         url: '../backend/process_info/delete_book.php',
         type: 'POST',
         data: {id : id},
         success:function(response){
+            console.log(id);
             console.log(response);
         }
     })
