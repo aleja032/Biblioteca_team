@@ -62,4 +62,22 @@ class Book{
         }
         
     }
+
+    public function searchBookByID($book_id){
+        try {
+            $query = $this -> db_connect -> prepare("SELECT * FROM books WHERE id = ?");
+            $query -> execute();
+            $result = $query -> get_result();
+            $books = $result -> fetch_assoc();
+
+            if($books){
+                return $books;
+            }
+            
+        } catch (Exception $e) {
+            echo"Error".$e -> getMessage();
+            return false;
+            $query -> close();
+        }
+    }
 }
